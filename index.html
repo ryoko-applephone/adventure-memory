@@ -1,16 +1,125 @@
-<!DOCTYPE html><html lang='ja'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Adventure Ver0.1</title><style>
-body{margin:0;font-family:sans-serif;background:linear-gradient(#17345f,#6bbcff);color:#fff}
-.page{display:none;padding:20px;max-width:700px;margin:auto;min-height:100vh}
-.active{display:block}.card{background:rgba(0,0,0,.25);padding:20px;border-radius:16px;margin-top:20px}
-button{width:100%;padding:14px;margin:8px 0;border:0;border-radius:10px;background:#e0b44d;font-size:18px}
-.bar{height:14px;background:#555;border-radius:8px}.fill{height:14px;width:0;background:#62e36d;border-radius:8px}
-</style></head><body>
-<div id='t' class='page active'><div class='card'><h1>⚔️こうすけとしゅんすけの冒険の書</h1><p>学校は毎日が冒険だ。</p><button onclick='show("p")'>▶冒険をはじめる</button></div></div>
-<div id='p' class='page'><div class='card'><h2>主人公を選ぼう</h2><button onclick='sel("こうすけ")'>こうすけ</button><button onclick='sel("しゅんすけ")'>しゅんすけ</button></div></div>
-<div id='h' class='page'><div class='card'><h2 id='w'></h2><p>🏯城下町 Lv1</p><div class='bar'><div class='fill'></div></div><p>EXP0/100</p><button onclick='show("m")'>🏕️白樺湖編</button><button disabled>🏫学校編(次回)</button></div></div>
-<div id='m' class='page'><div class='card'><h2>🗺️白樺湖マップ</h2><p>🚌→🌲→🏨→🔥→🐄→🌌→🏆</p><button onclick='show("h")'>戻る</button></div></div>
-<script>
-function show(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active')}
-function sel(n){localStorage.setItem('player',n);document.getElementById('w').textContent='ようこそ '+n+'！';show('h')}
-window.onload=()=>{let p=localStorage.getItem('player');if(p)document.getElementById('w').textContent='ようこそ '+p+'！';}
-</script></body></html>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>こうすけとしゅんすけの冒険の書 Ver0.2 Part1</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="titleScreen" class="screen">
+  <div class="bg-layer mountains"></div>
+  <div class="bg-layer clouds"></div>
+
+  <main class="title-card">
+    <h1>⚔️ こうすけとしゅんすけの冒険の書</h1>
+    <p>学校は毎日が冒険だ。</p>
+
+    <button id="startButton">▶ 冒険をはじめる</button>
+
+    <div class="version">
+      Ver0.2 Part1
+    </div>
+  </main>
+</div>
+
+<div id="playerScreen" class="screen hidden">
+  <h2>主人公を選ぼう</h2>
+
+  <div class="player-list">
+    <button class="player" data-player="こうすけ">
+      ⚔️ こうすけ
+    </button>
+
+    <button class="player" data-player="しゅんすけ">
+      ⚔️ しゅんすけ
+    </button>
+  </div>
+</div>
+
+<div id="homeScreen" class="screen hidden">
+
+<header>
+
+<h2 id="playerName">
+ようこそ！
+</h2>
+
+<div class="status">
+
+<div class="level">
+Lv.1
+</div>
+
+<div class="exp">
+<div id="expBar"></div>
+</div>
+
+</div>
+
+</header>
+
+<section class="castle-area">
+
+<div class="castle">
+🏯
+</div>
+
+<p>
+城下町はまだ小さな村です。<br>
+冒険を進めると少しずつ発展します。
+</p>
+
+</section>
+
+<section class="menu">
+
+<button id="shirakabaButton">
+🏕 白樺湖編
+</button>
+
+<button disabled>
+🏫 学校編（近日追加）
+</button>
+
+<button disabled>
+🎖 バッジ
+</button>
+
+</section>
+
+</div>
+
+<div id="mapScreen" class="screen hidden">
+
+<h2>🗺 白樺湖マップ</h2>
+
+<ul class="map">
+
+<li>🚌 出発</li>
+<li>⬇</li>
+<li>🌲 オリエンテーリング</li>
+<li>⬇</li>
+<li>🏨 ホテル</li>
+<li>⬇</li>
+<li>🔥 キャンプファイヤー</li>
+<li>⬇</li>
+<li>🐄 牧場</li>
+<li>⬇</li>
+<li>🌌 ナイトウォーク</li>
+<li>⬇</li>
+<li>🏆 ゴール</li>
+
+</ul>
+
+<button id="backButton">
+ホームへ戻る
+</button>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
