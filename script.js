@@ -46,3 +46,16 @@ show('home');
 show('title');
 }
 });
+
+screens.event=document.getElementById('eventScreen');
+document.getElementById('questButton')?.addEventListener('click',()=>show('event'));
+document.getElementById('clearButton')?.addEventListener('click',()=>{
+ let save=JSON.parse(localStorage.getItem('adventureSave')||'{}');
+ save.exp=Math.min((save.exp||25)+15,100);
+ save.badges=save.badges||[];
+ if(!save.badges.includes('bus')) save.badges.push('bus');
+ localStorage.setItem('adventureSave',JSON.stringify(save));
+ loadPlayer();
+ alert('経験値+15！');
+ show('home');
+});
