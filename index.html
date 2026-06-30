@@ -1,9 +1,7 @@
-<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Adventure v0.2 Part2</title><link rel="stylesheet" href="style.css"></head><body>
-<div id="titleScreen" class="screen"><div class="title-card"><h1>⚔️こうすけとしゅんすけの冒険</h1><button id="startButton">冒険をはじめる</button></div></div>
-<div id="playerScreen" class="screen hidden"><h2>主人公を選ぼう</h2><div class="player-list"><button class="player" data-player="こうすけ">こうすけ</button><button class="player" data-player="しゅんすけ">しゅんすけ</button></div></div>
-<div id="homeScreen" class="screen hidden"><header><h2 id="playerName"></h2><div class="exp"><div id="expBar"></div></div></header><div class="menu"><button id="shirakabaButton">🏕 白樺湖編</button></div></div>
-<div id="mapScreen" class="screen hidden"><h2>白樺湖マップ</h2><ul class="map">
-<li>🚌 バス</li><li>🌲 森</li><li>🏨 ホテル</li><li>🔥 キャンプファイヤー</li><li>🐄 牧場</li><li>🌌 星空</li><li>🏆 ゴール</li></ul>
-<button id="questButton">最初のイベント</button><button id="backButton">戻る</button></div>
-<div id="eventScreen" class="screen hidden"><div class="title-card"><h2>🚌 出発！</h2><p>みんなでバスに乗って白樺湖へ！</p><button id="clearButton">クリア！</button></div></div>
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Adventure v0.3</title><link rel="stylesheet" href="style.css"></head><body>
+<div id="titleScreen"><h1>⚔️こうすけとしゅんすけの冒険の書</h1><button id="startButton">冒険をはじめる</button></div>
+<div id="playerScreen" class="hidden"><h2>主人公を選ぼう</h2><button class="player" data-player="こうすけ">こうすけ</button><button class="player" data-player="しゅんすけ">しゅんすけ</button></div>
+<div id="homeScreen" class="hidden"><h2 id="playerName"></h2><div class="exp"><div id="expBar"></div></div><button id="shirakabaButton">🏕️白樺湖編</button><button id="badgeButton">🏅バッジ</button></div>
+<div id="mapScreen" class="hidden"><h2>白樺湖マップ</h2><button class="event" data-exp="15">🚌 出発</button><button class="event" data-exp="20">🔥 キャンプファイヤー</button><button id="backButton">城へ戻る</button></div>
+<div id="badgeScreen" class="hidden"><h2>🏅思い出バッジ</h2><ul id="badgeList"></ul><button id="badgeBack">戻る</button></div>
 <script src="script.js"></script></body></html>

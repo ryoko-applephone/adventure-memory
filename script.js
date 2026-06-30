@@ -1,61 +1,16 @@
-const screens={
-title:document.getElementById('titleScreen'),
-player:document.getElementById('playerScreen'),
-home:document.getElementById('homeScreen'),
-map:document.getElementById('mapScreen')
-};
 
-function show(name){
-Object.values(screens).forEach(s=>s&&s.classList.add('hidden'));
-screens[name]&&screens[name].classList.remove('hidden');
-}
-
-document.getElementById('startButton')?.addEventListener('click',()=>show('player'));
-
-document.querySelectorAll('.player').forEach(btn=>{
-btn.addEventListener('click',()=>{
-const save={
-name:btn.dataset.player,
-level:1,
-exp:25,
-badges:[]
-};
-localStorage.setItem('adventureSave',JSON.stringify(save));
-loadPlayer();
-show('home');
-});
-});
-
-function loadPlayer(){
-const save=JSON.parse(localStorage.getItem('adventureSave')||'{}');
-if(save.name){
-document.getElementById('playerName').textContent='⚔️ '+save.name+' の城';
-const bar=document.getElementById('expBar');
-if(bar) bar.style.width=(save.exp||0)+'%';
-}
-}
-
-document.getElementById('shirakabaButton')?.addEventListener('click',()=>show('map'));
-document.getElementById('backButton')?.addEventListener('click',()=>show('home'));
-
-window.addEventListener('load',()=>{
-if(localStorage.getItem('adventureSave')){
-loadPlayer();
-show('home');
-}else{
-show('title');
-}
-});
-
-screens.event=document.getElementById('eventScreen');
-document.getElementById('questButton')?.addEventListener('click',()=>show('event'));
-document.getElementById('clearButton')?.addEventListener('click',()=>{
- let save=JSON.parse(localStorage.getItem('adventureSave')||'{}');
- save.exp=Math.min((save.exp||25)+15,100);
- save.badges=save.badges||[];
- if(!save.badges.includes('bus')) save.badges.push('bus');
- localStorage.setItem('adventureSave',JSON.stringify(save));
- loadPlayer();
- alert('経験値+15！');
- show('home');
-});
+const ids=["titleScreen","playerScreen","homeScreen","mapScreen","badgeScreen"];
+const screens={};ids.forEach(i=>screens[i]=document.getElementById(i));
+function show(id){Object.values(screens).forEach(s=>s.classList.add("hidden"));screens[id].classList.remove("hidden");if(id==="badgeScreen")renderBadges();}
+function save(){localStorage.setItem("adventureSave",JSON.stringify(state));}
+let state=JSON.parse(localStorage.getItem("adventureSave")||"null");
+document.getElementById("startButton").onclick=()=>show("playerScreen");
+document.querySelectorAll(".player").forEach(b=>b.onclick=()=>{state={name:b.dataset.player,exp:25,badges:[]};save();load();show("homeScreen");});
+function load(){if(!state)return;playerName.textContent="⚔️ "+state.name+" の城";expBar.style.width=state.exp+"%";}
+shirakabaButton.onclick=()=>show("mapScreen");
+backButton.onclick=()=>{load();show("homeScreen");}
+badgeButton.onclick=()=>show("badgeScreen");
+badgeBack.onclick=()=>show("homeScreen");
+document.querySelectorAll(".event").forEach(b=>b.onclick=()=>{const n=b.textContent.trim();if(!state.badges.includes(n)){state.badges.push(n);state.exp=Math.min(100,state.exp+Number(b.dataset.exp));alert(n+"クリア！");save();}load();});
+function renderBadges(){badgeList.innerHTML="";(state?.badges||[]).forEach(x=>{let li=document.createElement("li");li.textContent="🏅 "+x;badgeList.appendChild(li);});}
+window.onload=()=>{if(state){load();show("homeScreen");}else show("titleScreen");}
